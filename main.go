@@ -1,7 +1,7 @@
 package main
 
-import "fmt"
+import "tgame/bot"
 
 func main() {
-	fmt.Println("")
+	bot.Start()
 }

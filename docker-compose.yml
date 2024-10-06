@@ -1,31 +1,40 @@
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  go-app:
+    build: .
+    container_name: go-app
     volumes:
       - .:/app
     ports:
       - "8080:8080"
+    depends_on:
+      - postgres
+      - redis
     environment:
-      - ENV=development
-    command: go run main.go  # Modo de desenvolvimento
+      - POSTGRES_HOST=tgame
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=tgame
+      - POSTGRES_PASSWORD=tgame
+      - POSTGRES_DB=tgame
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
 
-  db:
-    image: postgres:alpine
+  postgres:
+    image: postgres:latest
+    container_name: postgres
     environment:
-      POSTGRES_USER: tgame
-      POSTGRES_PASSWORD: tgame
-      POSTGRES_DB: tgame
-    volumes:
-      - db_data:/var/lib/postgresql/data
+      - POSTGRES_USER=tgame
+      - POSTGRES_PASSWORD=tgame
+      - POSTGRES_DB=tgame
     ports:
       - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 
   redis:
-    image: redis:alpine
+    image: redis:latest
+    container_name: redis
     ports:
       - "6379:6379"
 
 volumes:
-  db_data:
+  pgdata:
