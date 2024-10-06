@@ -35,7 +35,7 @@
 
 1. Instale o Docker. Se você está usando uma distro derivada ou diferente (Ubuntu, Fedora, Rock) busque na documentação da sua distro no site oficial do Docker e busque como instalar.
 
-## Rodando com o Docker
+## Rodando com o Docker [Branch de desenvolvimento]
 
 Rode o seguinte comando após o Docker ser instalado:
 
@@ -46,6 +46,12 @@ sudo docker-compose up --build
 ```
 Desta forma, o docker criará uma imagem com base no `docker-compose.yml` e subirá banco de dados, cache e o bot.
 
+## Rodando com o Docker [Produção]
+- Após fazer o que tem de ser feito, você pode rodar o seguinte comando:
+```bash
+sudo docker-compose build --no-cache
+sudo docker-compose up -d
+```
 
 ## Licença
 
